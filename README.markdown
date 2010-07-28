@@ -34,6 +34,44 @@ Use it:
     for shot in steve.shots_following():
         print '    ', shot.title, shot.url
 
+Documentation
+=============
+
+Here's some quick documentation. Want more? Read the source. It's less than
+a hundred lines.
+
+Dribbble
+--------
+
+You'll use `dribbble.Dribble` to make most of your API calls.
+
+    import dribbble
+    d = dribbble.Dribbble()
+
+* **`player(username)`**: Get the player with the given username. You can pass
+  in the user's numeric ID instead if you feel like it.
+* **`shot(shot_id)`**: Get the shot with the given ID.
+* **`shots(type)`**: Get a list of the latest shots of the give type. The type
+  can be `'everyone'`, `'popular'`, or `'debuts'`. If you don't pass in a type
+  you'll get `'everyone'` shots.
+
+Player
+------
+
+You can get a Player object by calling `d.player()`. Shots also have a `player`
+attribute.
+
+* **`id`**: The (numeric) user id of the player.
+* **`username`**: The username of the player.
+* **`name`**: The full name of the player.
+* **`url`**: The URL of the player's profile.
+* **`avatar_url`**: The URL of the player's avatar image.
+* **`location`**: The location of the player, if they've listed one.
+* **`shots()`**: A list containing the player's latest shots.
+* **`shots_following()`**: A list containing the latest shots of the players
+  this player is following.
+
+
 [Dribbble]: http://dribbble.com/
 [license]: http://en.wikipedia.org/wiki/MIT_License
 [Python]: http://python.org/
