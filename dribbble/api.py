@@ -1,4 +1,4 @@
-import urllib, urllib2
+import time, urllib, urllib2
 
 try: import simplejson as json
 except ImportError: import json
@@ -7,7 +7,13 @@ except ImportError: import json
 API_URL = 'http://api.dribbble.com/'
 
 
+_TRACK_CALLS = False
+_calls = []
+
 def _api(url, id, pagination=None):
+    if _TRACK_CALLS:
+        _calls.append(time.time())
+
     if pagination:
         query = '?' + urllib.urlencode(zip(('page', 'per_page'), pagination))
     else:
@@ -32,8 +38,12 @@ def _i(f, start_page, **kwargs):
 
 
 class Dribbble(object):
-    def __init__(self):
-        pass
+    def __init__(self, track_calls=False):
+        # Hacky way to make sure the tests don't rate limit us.
+        global _TRACK_CALLS
+        if track_calls:
+            _TRACK_CALLS = True
+
 
     def player(self, username):
         '''Return the player with the given username (or user ID).'''
@@ -52,8 +62,13 @@ class Dribbble(object):
         data = _api('shots/%s', typ, (page, per_page))
         return [Shot(sd) for sd in data]
 
+
     def ishots(self, typ='everyone', start_page=1):
         return _i(self.shots, start_page, typ=typ)
+
+
+    def calls(self):
+        return _calls
 
 class Shot(object):
     '''A single shot.
