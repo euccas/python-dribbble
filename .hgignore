@@ -1,0 +1,10 @@
+syntax: glob
+
+*.pyc
+.DS_Store
+tags
+.ropeproject
+*.swo
+*.swp
+*.log
+docs/_build
