@@ -67,9 +67,10 @@ attribute.
 * `url`: The URL of the player's profile.
 * `avatar_url`: The URL of the player's avatar image.
 * `location`: The location of the player, if they've listed one.
-* `shots()`: A list containing the player's latest shots.
-* `shots_following()`: A list containing the latest Shots of the players
-  this player is following.
+* `shots()`: A list containing the player's latest shots. You can pass `page`
+* `shots_following()`: A list containing the latest Shots of the players this
+  player is following. You can pass `page` and/or `per_page` to control
+  pagination.
 
 Shot
 ----

@@ -1,4 +1,4 @@
-import urllib2
+import urllib, urllib2
 
 try: import simplejson as json
 except ImportError: import json
@@ -7,8 +7,17 @@ except ImportError: import json
 API_URL = 'http://api.dribbble.com/'
 
 
-def _api(url, id):
-    u = urllib2.urlopen(API_URL + url % id)
+def _api(url, id, pagination=None):
+    print url
+    if pagination:
+        query = '?' + urllib.urlencode(zip(('page', 'per_page'), pagination))
+        print query
+    else:
+        query = ''
+
+    print API_URL + (url % id) + query
+
+    u = urllib2.urlopen(API_URL + (url % id) + query)
     return json.loads(u.read())
 
 class Dribbble(object):
@@ -23,13 +32,13 @@ class Dribbble(object):
         '''Return the shot with the given ID.'''
         return Shot(_api('shots/%d', shotid))
 
-    def shots(self, typ='everyone'):
+    def shots(self, typ='everyone', page=1, per_page=15):
         '''Return shots.
 
         The ``typ`` argument can be ``'everyone'`` (the default), ``'popular'``,
         or ``'debuts'``, depending on the type of shots you want to retrieve.
         '''
-        data = _api('shots/%s', typ)
+        data = _api('shots/%s', typ, (page, per_page))
         return [Shot(sd) for sd in data]
 
 
@@ -79,14 +88,15 @@ class Player(object):
         # Srsly, Dribbble API?
         self.username = self.url.strip('/').rsplit('/', 1)[-1]
 
-    def shots(self):
+
+    def shots(self, page=1, per_page=15):
         '''Return shots from this player.'''
-        data = _api('players/%s/shots', self.id)
+        data = _api('players/%s/shots', self.id, (page, per_page))
         return [Shot(sd) for sd in data]
 
-    def shots_following(self):
+    def shots_following(self, page=1, per_page=15):
         '''Return shots from players this player is following.'''
-        data = _api('players/%s/shots/following', self.id)
+        data = _api('players/%s/shots/following', self.id, (page, per_page))
         return [Shot(sd) for sd in data]
 
 
