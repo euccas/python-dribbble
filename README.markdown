@@ -48,10 +48,10 @@ You'll use `dribbble.Dribble` to make most of your API calls.
     import dribbble
     d = dribbble.Dribbble()
 
-* **`player(username)`**: Get the player with the given username. You can pass
+* `player(username)`: Get the player with the given username. You can pass
   in the user's numeric ID instead if you feel like it.
-* **`shot(shot_id)`**: Get the shot with the given ID.
-* **`shots(type)`**: Get a list of the latest shots of the give type. The type
+* `shot(shot_id)`: Get the shot with the given ID.
+* `shots(type)`: Get a list of the latest shots of the give type. The type
   can be `'everyone'`, `'popular'`, or `'debuts'`. If you don't pass in a type
   you'll get `'everyone'` shots.
 
@@ -61,14 +61,14 @@ Player
 You can get a Player object by calling `d.player()`. Shots also have a `player`
 attribute.
 
-* **`id`**: The (numeric) user id of the player.
-* **`username`**: The username of the player.
-* **`name`**: The full name of the player.
-* **`url`**: The URL of the player's profile.
-* **`avatar_url`**: The URL of the player's avatar image.
-* **`location`**: The location of the player, if they've listed one.
-* **`shots()`**: A list containing the player's latest shots.
-* **`shots_following()`**: A list containing the latest Shots of the players
+* `id`: The (numeric) user id of the player.
+* `username`: The username of the player.
+* `name`: The full name of the player.
+* `url`: The URL of the player's profile.
+* `avatar_url`: The URL of the player's avatar image.
+* `location`: The location of the player, if they've listed one.
+* `shots()`: A list containing the player's latest shots.
+* `shots_following()`: A list containing the latest Shots of the players
   this player is following.
 
 Shot
@@ -76,13 +76,13 @@ Shot
 
 You can get Shot objects from `d.shot()`, `d.shots()`, or from a Player object.
 
-* **`id`**: The (numeric) shot id of the shot.
-* **`title`**: The title of the shot.
-* **`url`**: The URL of the shot's page.
-* **`image_url`**: The URL of the actual image of the shot.
-* **`width`**: The width of the shot image.
-* **`height`**: The height of the shot image.
-* **`player`**: The Player that made this shot.
+* `id`: The (numeric) shot id of the shot.
+* `title`: The title of the shot.
+* `url`: The URL of the shot's page.
+* `image_url`: The URL of the actual image of the shot.
+* `width`: The width of the shot image.
+* `height`: The height of the shot image.
+* `player`: The Player that made this shot.
 
 
 [Dribbble]: http://dribbble.com/
