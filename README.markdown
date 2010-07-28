@@ -34,6 +34,12 @@ Use it:
     for shot in steve.shots_following():
         print '    ', shot.title, shot.url
 
+    simplebits = d.player('simplebits')
+
+    print 'All shots from @simplebits:'
+    for shot in simplebits.ishots():
+        print '%8d: %s' % (shot.id, shot.title)
+
 Documentation
 =============
 
@@ -68,9 +74,19 @@ attribute.
 * `avatar_url`: The URL of the player's avatar image.
 * `location`: The location of the player, if they've listed one.
 * `shots()`: A list containing the player's latest shots. You can pass `page`
+  and/or `per_page` to control pagination.
 * `shots_following()`: A list containing the latest Shots of the players this
   player is following. You can pass `page` and/or `per_page` to control
   pagination.
+* `ishots()`: A generator that yields shots from this player, newest to oldest.
+  It will hit Dribbble's API whenever it needs more shots, so be careful not to
+  get rate limited (i.e. don't try to take more than ~1,000 shots per minute).
+  You can pass `start_page` to start at a certain page.
+* `ishots_following()`: A generator that yields shots from players this player
+  is following, newest to oldest.  It will hit Dribbble's API whenever it needs
+  more shots, so be careful not to get rate limited (i.e. don't try to take
+  more than ~1,000 shots per minute). You can pass `start_page` to start at
+  a certain page.
 
 Shot
 ----

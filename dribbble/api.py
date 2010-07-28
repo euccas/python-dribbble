@@ -8,17 +8,28 @@ API_URL = 'http://api.dribbble.com/'
 
 
 def _api(url, id, pagination=None):
-    print url
     if pagination:
         query = '?' + urllib.urlencode(zip(('page', 'per_page'), pagination))
-        print query
     else:
         query = ''
 
-    print API_URL + (url % id) + query
-
     u = urllib2.urlopen(API_URL + (url % id) + query)
     return json.loads(u.read())
+
+def _i(f, start_page, **kwargs):
+    i = start_page
+    l = f(page=start_page, per_page=30, **kwargs)
+    seen = set([item.id for item in l])
+
+    while l:
+        yield l.pop(0)
+        if not l:
+            i += 1
+            items = f(page=i, per_page=30, **kwargs)
+            ids = set([item.id for item in items])
+            l.extend([item for item in items if item.id not in seen])
+            seen.update(ids)
+
 
 class Dribbble(object):
     def __init__(self):
@@ -41,6 +52,8 @@ class Dribbble(object):
         data = _api('shots/%s', typ, (page, per_page))
         return [Shot(sd) for sd in data]
 
+    def ishots(self, typ='everyone', start_page=1):
+        return _i(self.shots, start_page, typ=typ)
 
 class Shot(object):
     '''A single shot.
@@ -98,5 +111,12 @@ class Player(object):
         '''Return shots from players this player is following.'''
         data = _api('players/%s/shots/following', self.id, (page, per_page))
         return [Shot(sd) for sd in data]
+
+
+    def ishots(self, start_page=1):
+        return _i(self.shots, start_page)
+
+    def ishots_following(self, start_page=1):
+        return _i(self.shots_following, start_page)
 
 
