@@ -48,6 +48,7 @@ class Shot(object):
         print s.image_url
         print s.width
         print s.height
+        print s.player.name
     '''
     def __init__(self, data):
         for k, v in data.items():

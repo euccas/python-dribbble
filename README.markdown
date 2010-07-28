@@ -68,8 +68,21 @@ attribute.
 * **`avatar_url`**: The URL of the player's avatar image.
 * **`location`**: The location of the player, if they've listed one.
 * **`shots()`**: A list containing the player's latest shots.
-* **`shots_following()`**: A list containing the latest shots of the players
+* **`shots_following()`**: A list containing the latest Shots of the players
   this player is following.
+
+Shot
+----
+
+You can get Shot objects from `d.shot()`, `d.shots()`, or from a Player object.
+
+* **`id`**: The (numeric) shot id of the shot.
+* **`title`**: The title of the shot.
+* **`url`**: The URL of the shot's page.
+* **`image_url`**: The URL of the actual image of the shot.
+* **`width`**: The width of the shot image.
+* **`height`**: The height of the shot image.
+* **`player`**: The Player that made this shot.
 
 
 [Dribbble]: http://dribbble.com/
