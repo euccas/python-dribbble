@@ -1,7 +1,6 @@
 python-dribbble is a simple Python library for interacting with [Dribbble][].
-It's [MIT/X11 licensed][license]. It requires [Python][] 2.5+.
-
-It was written in about half an hour, so don't expect miracles.
+It's [MIT/X11 licensed][license]. It requires [Python][] 2.6+ or 2.5 and
+[simplejson][].
 
 Install it with [pip][]:
 
@@ -102,7 +101,20 @@ You can get Shot objects from `d.shot()`, `d.shots()`, or from a Player object.
 * `player`: The Player that made this shot.
 
 
+Contributing
+============
+
+Fork the [Mercurial repository][bb] (preferred) or the [git repository][gh],
+add your feature, send a pull request. Stick to the coding style and add a test
+for your feature.
+
+Make sure you look at the existing tests before writing your own -- they do
+ugly "clever" things to avoid getting banned by Dribbble's API.
+
 [Dribbble]: http://dribbble.com/
 [license]: http://en.wikipedia.org/wiki/MIT_License
 [Python]: http://python.org/
+[simplejson]: http://simplejson.googlecode.com/svn/tags/simplejson-2.1.1/docs/index.html
 [pip]: http://pip.openplans.org/
+[bb]: http://bitbucket.org/sjl/python-dribbble/
+[gh]: http://github.com/sjl/python-dribbble/
