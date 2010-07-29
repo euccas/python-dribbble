@@ -60,7 +60,7 @@ class Dribbble(object):
         or ``'debuts'``, depending on the type of shots you want to retrieve.
         '''
         data = _api('shots/%s', typ, (page, per_page))
-        return [Shot(sd) for sd in data]
+        return [Shot(sd) for sd in data['shots']]
 
 
     def ishots(self, typ='everyone', start_page=1):
@@ -120,12 +120,12 @@ class Player(object):
     def shots(self, page=1, per_page=15):
         '''Return shots from this player.'''
         data = _api('players/%s/shots', self.id, (page, per_page))
-        return [Shot(sd) for sd in data]
+        return [Shot(sd) for sd in data['shots']]
 
     def shots_following(self, page=1, per_page=15):
         '''Return shots from players this player is following.'''
         data = _api('players/%s/shots/following', self.id, (page, per_page))
-        return [Shot(sd) for sd in data]
+        return [Shot(sd) for sd in data['shots']]
 
 
     def ishots(self, start_page=1):
