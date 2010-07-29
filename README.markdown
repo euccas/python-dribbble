@@ -43,7 +43,7 @@ Documentation
 =============
 
 Here's some quick documentation. Want more? Read the source. It's less than
-a hundred lines.
+a hundred and fifty lines.
 
 Dribbble
 --------
